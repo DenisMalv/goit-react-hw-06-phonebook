@@ -48,20 +48,12 @@ const contactsSlice = createSlice({
   },
   reducers: {
     addContact: (state, action) => {
-      const checkingAddedContact = outName => {
-        return state.items.find(({ name }) => name === outName);
-      };
-      const newContact = checkingAddedContact(action.payload.name);
-
       const contact = {
         id: nanoid(3),
         name: action.payload.name,
         number: action.payload.number,
       };
-
-      newContact
-        ? alert(`${newContact.name} is already in contacts`)
-        : state.items.push(contact);
+      state.items.push(contact);
     },
     deleteContact: (state, action) => {
       state.items = state.items.filter(item => item.id !== action.payload.id);
